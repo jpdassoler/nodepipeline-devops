@@ -20,7 +20,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push 040753065866.dkr.ecr.us-east-1.amazonaws.com/nodepipeline-devops:latest
+      - docker push 040753065866.dkr.ecr.us-east-1.amazonaws.com/nodepipeline-devops:${CODEBUILD_RESOLVED_SOURCE_VERSION}-v${CODEBUILD_BUILD_NUMBER}
       - echo Writing image definitions file...
       - printf '[{"name":"nodepipeline-devops","imageUri":"%s"}]' 040753065866.dkr.ecr.us-east-1.amazonaws.com/nodepipeline-devops:latest > imagedefinitions.json
       - cat imagedefinitions.json 
