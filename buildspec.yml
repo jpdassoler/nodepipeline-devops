@@ -14,7 +14,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t nodepipeline-devops .
-      - docker tag nodepipeline-devops:latest 040753065866.dkr.ecr.us-east-1.amazonaws.com/nodepipeline-devops:latest
+      - docker tag nodepipeline-devops:latest 040753065866.dkr.ecr.us-east-1.amazonaws.com/nodepipeline-devops:${CODEBUILD_RESOLVED_SOURCE_VERSION}-v${CODEBUILD_BUILD_NUMBER}
       
   post_build:
     commands:
