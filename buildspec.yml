@@ -9,9 +9,6 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 040753065866.dkr.ecr.us-east-1.amazonaws.com
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-      - docker info
-      - echo $COMMIT_HASH
-      - echo $IMAGE_TAG
   build:
     commands:
       - echo Build started on `date`
@@ -24,9 +21,6 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
       - docker push 040753065866.dkr.ecr.us-east-1.amazonaws.com/nodepipeline-devops:latest
-      - echo $COMMIT_HASH
-      - echo $IMAGE_TAG
-      - docker info
       - echo Writing image definitions file...
       - printf '[{"name":"nodepipeline-devops","imageUri":"%s"}]' 040753065866.dkr.ecr.us-east-1.amazonaws.com/nodepipeline-devops:latest > imagedefinitions.json
       - cat imagedefinitions.json 
